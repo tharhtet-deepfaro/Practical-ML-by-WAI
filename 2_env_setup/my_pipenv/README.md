@@ -2,7 +2,7 @@
 pip install pipenv
 
 # 2. Navigate to your project directory
-cd my_project
+cd my_pipenv
 
 # 3. Initialize pipenv (creates Pipfile)
 pipenv --python 3.9

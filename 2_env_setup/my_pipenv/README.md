@@ -1,3 +1,4 @@
+```bash
 # 1. Install pipenv globally
 pip install pipenv
 
@@ -18,3 +19,5 @@ pipenv shell
 
 # 7. Exit the pipenv shell
 exit
+
+```

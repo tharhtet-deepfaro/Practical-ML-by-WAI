@@ -5,7 +5,10 @@ pip install pipenv
 # 2. Navigate to your project directory
 cd my_pipenv
 
-# 3. Initialize pipenv (creates Pipfile)
+which python
+pipenv install --python Your-path
+
+# 3. Initialize pipenv (creates Pipfile) Not Recommending to use
 pipenv --python 3.9
 
 # 4. Install a package (creates virtual environment if it doesn't exist)

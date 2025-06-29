@@ -12,6 +12,9 @@ pipenv install --python Your-path
 pipenv --python 3.9
 
 # 4. Install a package (creates virtual environment if it doesn't exist)
+pipenv run python hello.py
+
+# install prod packages
 pipenv install requests
 
 # 5. Run a script within the pipenv environment
@@ -22,5 +25,12 @@ pipenv shell
 
 # 7. Exit the pipenv shell
 exit
+
+# check py env location without going under the pipenv 
+pipenv --py
+
+# install dev packages : only for mac user
+pipenv install  --dev tensorflow-macos
+
 
 ```

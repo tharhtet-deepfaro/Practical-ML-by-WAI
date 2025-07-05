@@ -161,3 +161,6 @@ cython_debug/
 2_env_setup/my_venv/.DS_Store
 2_env_setup/my_venv/my_env/.DS_Store
 2_env_setup/.DS_Store
+/4_image_processing_techniques/img_lab/labelme
+4_image_processing_techniques/img_lab/.DS_Store
+4_image_processing_techniques/.DS_Store

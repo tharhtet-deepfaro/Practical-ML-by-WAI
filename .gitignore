@@ -164,3 +164,5 @@ cython_debug/
 /4_image_processing_techniques/img_lab/labelme
 4_image_processing_techniques/img_lab/.DS_Store
 4_image_processing_techniques/.DS_Store
+4_image_processing_techniques/img_lab/test_dataset/sample_data/.DS_Store
+4_image_processing_techniques/img_lab/test_dataset/sample_data/dog/.DS_Store

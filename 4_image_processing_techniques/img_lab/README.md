@@ -6,9 +6,20 @@ labelme data_annotated/ --labels labels.txt
 labelme
 ```
 
+### types of image dataset
+classification dataset
+object detection dataset
+segmentation dataset
+ -  instance segmentation
+ -  semantic segmentation
 
-### VOC Format 
 
+
+
+### install labelme
+```bash
+pip install labelme
+```
 
 
 
@@ -31,7 +42,7 @@ output_dir/
 
 
 ```
-### Convert to COC-format Dataset
+### Convert to COCO-format Dataset
 - Single .json contains:
     - images
     - annotations

@@ -9,6 +9,8 @@ scikit-learn = "*"
 graphviz = "*"
 matplotlib = "*"
 python-dotenv = "*"
+opencv-python = "*"
+tensorflow = "==2.17.0"
 
 [dev-packages]
 ipykernel = "*"

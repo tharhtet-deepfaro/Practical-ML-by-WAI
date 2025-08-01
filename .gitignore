@@ -169,3 +169,4 @@ cython_debug/
 .DS_Store
 
 /5_machine_learning/K-Mean_Clustering/fruit_clustering/fruits
+/6_deep_learning/CNN/cats_and_dogs_filtered

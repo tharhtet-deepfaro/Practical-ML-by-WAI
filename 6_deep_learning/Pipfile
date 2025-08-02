@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 opencv-python = "*"
 tensorflow = "==2.19.0"
+scipy = "*"
 
 [dev-packages]
 tensorflow-macos = "*"

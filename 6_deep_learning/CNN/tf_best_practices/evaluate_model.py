@@ -2,6 +2,7 @@ import tensorflow as tf
 import numpy as np
 import json
 import os
+import csv
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -15,6 +16,8 @@ input_shape = (128,128,3)
 test_dir = r'/Users/tharhtet/Documents/github/Practical-ML-by-WAI/6_deep_learning/CNN/cats_and_dogs_filtered/test'
 model_path = f"./binary_classification/{ML_Summer_School_ID}_model.h5"
 class_index_path = f'./binary_classification/{ML_Summer_School_ID}_class_indices.json'
+mark_path = "./binary_classification/marks.txt"
+
 
 
 model = tf.keras.models.load_model(model_path)
@@ -41,6 +44,9 @@ test_ds = tf.keras.utils.image_dataset_from_directory(
 y_true = []
 y_pred = []
 
+
+
+
 for images, labels in test_ds:
     predictions = model.predict(images)
 
@@ -57,5 +63,10 @@ for images, labels in test_ds:
 y_true = np.array(y_true)
 y_pred = np.array(y_pred)
 
+
 accuracy = np.mean(y_true == y_pred)
 print(f"Test Accuracy: {accuracy * 100:.2f}%")
+
+
+with open(mark_path, "w") as f:
+    f.write(str(int(accuracy * 100)))

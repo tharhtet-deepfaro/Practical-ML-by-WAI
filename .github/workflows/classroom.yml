@@ -1,0 +1,43 @@
+name: Autograding Tests
+'on': {}
+permissions:
+  checks: write
+  actions: read
+  contents: read
+
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+      - name: Checkout student submission
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run evaluation script
+        run: python evaluate_model.py
+
+      - name: Grade based on marks.txt
+        id: grade_accuracy
+        uses: classroom-resources/autograding-echo-grader@v1
+        with:
+          test-command: |
+            score=$(cat marks.txt)
+            echo "score=$score" >> $GITHUB_OUTPUT
+          max-score: 100
+
+      - name: Autograding Reporter
+        uses: classroom-resources/autograding-grading-reporter@v1
+        env:
+          GRADE_ACCURACY_RESULTS: "${{ steps.grade_accuracy.outputs.result }}"
+        with:
+          runners: grade_accuracy

@@ -31,7 +31,7 @@ jobs:
         uses: classroom-resources/autograding-echo-grader@v1
         with:
           test-command: |
-            score=$(cat marks.txt)
+            score=$(cat 6_deep_learning/CNN/tf_best_practices/binary_classification/marks.txt)
             echo "score=$score" >> $GITHUB_OUTPUT
           max-score: 100
 

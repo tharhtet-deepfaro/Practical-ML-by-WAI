@@ -1,5 +1,11 @@
 name: Autograding Tests
-'on': {}
+
+on:
+  push:
+    branches:
+      - main 
+
+      
 permissions:
   checks: write
   actions: read

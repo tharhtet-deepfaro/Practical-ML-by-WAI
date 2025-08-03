@@ -1,7 +1,5 @@
 # This is a corrected and updated GitHub Actions workflow for autograding.
-# It replaces the deprecated 'github-classroom/echo-grader' and 'github-classroom/grading-reporter'
-# with the current, unified 'education/autograding@v1' action.
-# This version dynamically creates the grading configuration based on a score in a file.
+# It uses a two-test system to ensure the final score is out of 100.
 
 name: Autograding Tests
 
@@ -25,8 +23,8 @@ jobs:
       - name: Checkout submission
         uses: actions/checkout@v4
 
-      # Step 2: Read score from marks.txt and create the autograding JSON file.
-      # This script is now more robust and creates the JSON in the correct format.
+      # Step 2: Read score from marks.txt and create the autograding JSON.
+      # This script now creates two tests to normalize the total score to 100.
       - name: Create autograding config
         run: |
           # Set a default score in case the file is missing or invalid
@@ -36,7 +34,6 @@ jobs:
           # Check if the file exists and is readable before trying to use it
           if [[ -f "$marks_file" ]]; then
               # Read the file and extract the first number found to make it more robust
-              # This handles cases where the file might contain "95 points" instead of just "95"
               file_content=$(cat "$marks_file")
               if [[ "$file_content" =~ ([0-9]+) ]]; then
                   score=${BASH_REMATCH[1]}
@@ -47,11 +44,21 @@ jobs:
               echo "Warning: $marks_file not found. Defaulting score to 0."
           fi
 
+          # Ensure the score does not exceed 100, which would cause an error.
+          if (( score > 100 )); then
+            echo "Warning: Score in file ($score) is greater than 100. Capping at 100."
+            score=100
+          fi
+
+          # Calculate the remaining points to make the total out of 100
+          remaining_points=$((100 - score))
+
           # Create the directory for the config file
           mkdir -p .github/classroom
 
-          # Create the autograding.json file with the correct structure: an object with a "tests" key.
-          # The 'tests' key must hold the array of test configurations.
+          # Create the autograding.json file with the correct structure.
+          # Test 1 passes and awards the student's score.
+          # Test 2 fails and holds the remaining points, setting the max score to 100.
           cat <<EOF > .github/classroom/autograding.json
           {
             "tests": [
@@ -63,12 +70,21 @@ jobs:
                 "output": "",
                 "comparison": "included",
                 "points": ${score}
+              },
+              {
+                "name": "Total Score Normalization",
+                "setup": "",
+                "run": "exit 1",
+                "input": "",
+                "output": "This is a hidden test to set the maximum score to 100. It is expected to fail.",
+                "comparison": "included",
+                "points": ${remaining_points}
               }
             ]
           }
           EOF
 
       # Step 3: Run the autograding action.
-      # This action will now find and use the correctly formatted .github/classroom/autograding.json file.
+      # This action will now report the score out of 100.
       - name: Autograding
         uses: education/autograding@v1

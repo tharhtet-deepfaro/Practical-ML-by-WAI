@@ -171,3 +171,4 @@ cython_debug/
 /5_machine_learning/K-Mean_Clustering/fruit_clustering/fruits
 /6_deep_learning/CNN/cats_and_dogs_filtered
 6_deep_learning/CNN/tf_best_practices/binary_classification/12345678_THS_model.h5
+/6_deep_learning/CNN/tf_best_practices/logs
